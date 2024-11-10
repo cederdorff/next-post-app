@@ -1,7 +1,8 @@
 import PostCard from "@/app/components/PostCard";
 
 export default async function PostPage({ params }) {
-  const url = `https://fb-rest-race-default-rtdb.firebaseio.com/posts/${params.id}.json`;
+  const { id } = await params;
+  const url = `https://fb-rest-race-default-rtdb.firebaseio.com/posts/${id}.json`;
   const response = await fetch(url);
   const post = await response.json();
 
