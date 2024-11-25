@@ -1,8 +1,15 @@
+import { auth } from "@/app/auth";
 import PostCard from "@/app/components/PostCard";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function PostPage({ params }) {
+  const session = await auth();
+  console.log(session);
+
+  if (!session) {
+    redirect("/sign-in");
+  }
   const { id } = await params;
   const url = `${process.env.NEXT_PUBLIC_FB_DB_URL}/posts/${id}.json`;
   const response = await fetch(url);
