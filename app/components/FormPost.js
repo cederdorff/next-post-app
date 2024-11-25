@@ -21,6 +21,7 @@ export default function FormPost({ action, post }) {
         name="image"
         id="image"
         defaultValue={post?.image}
+        aria-label="image"
         placeholder="Paste an image URL"
         onChange={event => setImage(event.target.value)}
       />
