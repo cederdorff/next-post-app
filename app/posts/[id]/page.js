@@ -1,4 +1,6 @@
 import PostCard from "@/app/components/PostCard";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function PostPage({ params }) {
   const { id } = await params;
@@ -6,14 +8,26 @@ export default async function PostPage({ params }) {
   const response = await fetch(url);
   const post = await response.json();
 
+  async function deletePost() {
+    "use server";
+    const response = await fetch(url, { method: "DELETE" });
+    if (response.ok) {
+      redirect("/posts");
+    }
+  }
+
   return (
     <main className="page" id="post-page">
       <div className="container">
         <h1>{post.caption}</h1>
         <PostCard post={post} />
         <div className="btns">
-          <button className="btn-cancel">Delete post</button>
-          <button>Update post</button>
+          <form action={deletePost}>
+            <button className="btn-cancel">Delete post</button>
+          </form>
+          <Link href={`/posts/${id}/update`}>
+            <button>Update post</button>
+          </Link>
         </div>
       </div>
     </main>

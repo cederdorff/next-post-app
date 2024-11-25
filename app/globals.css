@@ -163,6 +163,17 @@ form {
   margin: 1em 0;
 }
 
+.btns form {
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  width: 100%;
+}
+
+.btns a {
+  width: 100%;
+}
+
 /* ---------- Navigation Styling ---------- */
 nav {
   background-color: var(--green);
