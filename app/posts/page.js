@@ -1,9 +1,8 @@
 import PostCard from "../components/PostCard";
 
 export default async function Home() {
-  const response = await fetch(
-    "https://fb-rest-race-default-rtdb.firebaseio.com/posts.json"
-  ); // Fetch data from Firebase Realtime Database
+  const url = `${process.env.NEXT_PUBLIC_FB_DB_URL}/posts.json`; // Get Firebase Realtime Database URL
+  const response = await fetch(url); // Fetch data from Firebase Realtime Database
   const dataObject = await response.json(); // Convert response to JSON object
 
   const posts = Object.keys(dataObject).map(key => ({
