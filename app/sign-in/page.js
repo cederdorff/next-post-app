@@ -15,12 +15,22 @@ export default async function SignIn() {
       redirectTo: "/posts"
     });
   }
+  async function handleSignInWithGoogle() {
+    "use server";
+
+    await signIn("google", {
+      redirectTo: "/posts"
+    });
+  }
 
   return (
     <section id="sign-in-page" className="page">
       <h1>Sign In</h1>
       <form id="sign-in-form" action={handleSignInWithGitHub}>
         <button className="btn-github">Sign In with GitHub</button>
+      </form>
+      <form id="sign-in-form" action={handleSignInWithGoogle}>
+        <button className="btn-github">Sign In with Google</button>
       </form>
     </section>
   );

@@ -14,7 +14,7 @@ export default function FormUserProfile({ action, user }) {
         type="text"
         name="name"
         placeholder="Type name"
-        defaultValue={user.name}
+        defaultValue={user?.name}
       />
 
       <label htmlFor="email">Mail</label>
@@ -23,7 +23,7 @@ export default function FormUserProfile({ action, user }) {
         name="email"
         placeholder="Type email"
         disabled
-        defaultValue={user.mail}
+        defaultValue={user?.mail}
       />
 
       <label htmlFor="title">Title</label>
@@ -32,7 +32,7 @@ export default function FormUserProfile({ action, user }) {
         type="text"
         name="title"
         placeholder="Type your title"
-        defaultValue={user.title}
+        defaultValue={user?.title}
       />
 
       <label htmlFor="image">Image</label>

@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import { auth, signOut } from "../auth";
-import Image from "next/image";
 import FormUserProfile from "../components/FormUserProfile";
 
 export default async function Profile() {
