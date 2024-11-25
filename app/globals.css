@@ -116,6 +116,10 @@ input {
   border: 2px solid #fff;
 }
 
+input:disabled {
+  background-color: var(--light-grey);
+}
+
 .error {
   border: 2px solid var(--text-color-danger);
 }
@@ -174,6 +178,11 @@ form {
   width: 100%;
 }
 
+.btn-github {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
 /* ---------- Navigation Styling ---------- */
 nav {
   background-color: var(--green);
@@ -184,7 +193,7 @@ nav {
   text-align: center;
   top: 0;
   padding: 1em 2em;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 1em;
 }
 

@@ -1,7 +1,12 @@
 import { redirect } from "next/navigation";
 import FormPost from "../components/FormPost";
+import { auth } from "../auth";
 
-export default function CreatePage() {
+export default async function CreatePage() {
+  const session = await auth();
+  if (!session) {
+    redirect("/sign-in");
+  }
   const url = `${process.env.NEXT_PUBLIC_FB_DB_URL}/posts.json`; // Get Firebase Realtime Database URL
 
   async function createPost(formData) {
@@ -14,7 +19,7 @@ export default function CreatePage() {
       body: JSON.stringify({
         caption,
         image,
-        uid: "OPPe5jue2Ghxx3mtnxevB5FwCYe2"
+        uid: session.fbUid
       })
     });
 

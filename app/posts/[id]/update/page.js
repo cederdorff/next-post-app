@@ -1,7 +1,12 @@
+import { auth } from "@/app/auth";
 import FormPost from "@/app/components/FormPost";
 import { redirect } from "next/navigation";
 
 export default async function UpdatePage({ params }) {
+  const session = await auth();
+  if (!session) {
+    redirect("/sign-in");
+  }
   const { id } = await params;
   const url = `${process.env.NEXT_PUBLIC_FB_DB_URL}/posts/${id}.json`;
   const response = await fetch(url);
