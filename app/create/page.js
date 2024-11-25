@@ -1,9 +1,13 @@
+"use client";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import { useState } from "react";
 
 export default function CreatePage() {
+  const [image, setImage] = useState(""); // image state
+
   async function createPost(formData) {
-    "use server";
+    // "use server";
     const caption = formData.get("caption");
     const image = formData.get("image");
 
@@ -43,15 +47,20 @@ export default function CreatePage() {
             name="image"
             id="image"
             placeholder="Paste an image URL"
+            onChange={event => setImage(event.target.value)}
           />
           <label htmlFor="image-preview"></label>
           <Image
             id="image-preview"
             className="image-preview"
-            src="https://placehold.co/600x400.webp?text=Paste+image+URL"
+            src={
+              image
+                ? image
+                : "https://placehold.co/600x400.webp?text=Paste+image+URL"
+            }
             alt="Choose"
-            width={200}
-            height={300}
+            width={400}
+            height={200}
           />
 
           <div className="error-message">
