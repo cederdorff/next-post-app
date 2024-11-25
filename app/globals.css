@@ -184,7 +184,7 @@ nav {
   text-align: center;
   top: 0;
   padding: 1em 2em;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 1em;
 }
 
