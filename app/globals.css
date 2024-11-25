@@ -116,6 +116,10 @@ input {
   border: 2px solid #fff;
 }
 
+input:disabled {
+  background-color: var(--light-grey);
+}
+
 .error {
   border: 2px solid var(--text-color-danger);
 }
@@ -172,6 +176,11 @@ form {
 
 .btns a {
   width: 100%;
+}
+
+.btn-github {
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
 /* ---------- Navigation Styling ---------- */

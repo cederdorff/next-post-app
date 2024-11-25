@@ -8,13 +8,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         // Add additional properties to the token
-        token.fbUser = user.fbUser;
+        token.fbUid = user.fbUid;
       }
       return token;
     },
     async session({ session, token }) {
       // Add additional properties to the session
-      session.fbUser = token.fbUser;
+      session.fbUid = token.fbUid;
       return session;
     },
     async signIn({ user, account, profile }) {
@@ -30,7 +30,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
 
       // Add the user to the session
-      user.fbUser = fbUser;
+      user.fbUid = fbUser.id;
 
       return true;
     }
