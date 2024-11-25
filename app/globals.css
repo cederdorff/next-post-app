@@ -178,9 +178,20 @@ form {
   width: 100%;
 }
 
-.btn-github {
+.btn-github,
+.btn-google {
   grid-column-start: 1;
   grid-column-end: 3;
+}
+
+.btn-github {
+  background-color: #333;
+  color: #f1f1f1;
+}
+
+.btn-google {
+  background-color: #db4437;
+  color: #f1f1f1;
 }
 
 /* ---------- Navigation Styling ---------- */
