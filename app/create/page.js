@@ -1,13 +1,9 @@
-"use client";
-import Image from "next/image";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import FormPost from "../components/FormPost";
 
 export default function CreatePage() {
-  const [image, setImage] = useState(""); // image state
-
   async function createPost(formData) {
-    // "use server";
+    "use server";
     const caption = formData.get("caption");
     const image = formData.get("image");
 
@@ -32,45 +28,7 @@ export default function CreatePage() {
     <section className="page">
       <div className="container">
         <h1>Create New Post</h1>
-        <form action={createPost} className="form-grid">
-          <label htmlFor="caption">Caption</label>
-          <input
-            id="caption"
-            name="caption"
-            type="text"
-            aria-label="caption"
-            placeholder="Write a caption..."
-          />
-          <label htmlFor="image">Image</label>
-          <input
-            type="url"
-            name="image"
-            id="image"
-            placeholder="Paste an image URL"
-            onChange={event => setImage(event.target.value)}
-          />
-          <label htmlFor="image-preview"></label>
-          <Image
-            id="image-preview"
-            className="image-preview"
-            src={
-              image
-                ? image
-                : "https://placehold.co/600x400.webp?text=Paste+image+URL"
-            }
-            alt="Choose"
-            width={400}
-            height={200}
-          />
-
-          <div className="error-message">
-            <p></p>
-          </div>
-
-          <div className="btns">
-            <button>Create</button>
-          </div>
-        </form>
+        <FormPost action={createPost} />
       </div>
     </section>
   );
