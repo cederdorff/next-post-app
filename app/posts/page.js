@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "../auth";
 import PostCard from "../components/PostCard";
+import Link from "next/link";
 
 export default async function Home() {
   const session = await auth();
@@ -22,7 +23,9 @@ export default async function Home() {
     <main className="page">
       <section className="grid">
         {posts.map(post => (
-          <PostCard key={post.id} post={post} />
+          <Link key={post.id} href={`/posts/${post.id}`}>
+            <PostCard post={post} />
+          </Link>
         ))}
       </section>
     </main>
