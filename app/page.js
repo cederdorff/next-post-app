@@ -6,7 +6,7 @@ export default function Home() {
       <section className="container">
         <h1>Post App</h1>
         <p>This is my post app</p>
-        <Link href="/posts">Go to Posts</Link>
+        <Link href="/posts">Go to Posts.</Link>
       </section>
     </main>
   );
