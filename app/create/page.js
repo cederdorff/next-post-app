@@ -13,13 +13,15 @@ export default async function CreatePage() {
     "use server";
     const caption = formData.get("caption");
     const image = formData.get("image");
+    const createdAt = Date.now(); // Get the current timestamp
 
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify({
         caption,
         image,
-        uid: session.fbUid
+        uid: session.fbUid,
+        createdAt
       })
     });
 

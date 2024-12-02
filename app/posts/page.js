@@ -2,14 +2,18 @@ import { redirect } from "next/navigation";
 import { auth } from "../auth";
 import PostCard from "../components/PostCard";
 import Link from "next/link";
+import Form from "next/form";
+import FormSearch from "../components/FormSearch";
 
-export default async function Home() {
+export default async function Home({ searchParams }) {
   const session = await auth();
   console.log(session);
-
   if (!session) {
     redirect("/sign-in");
   }
+
+  const { query = "", sort = "created" } = await searchParams; // Default values
+
   const url = `${process.env.NEXT_PUBLIC_FB_DB_URL}/posts.json`; // Get Firebase Realtime Database URL
   const response = await fetch(url); // Fetch data from Firebase Realtime Database
   const dataObject = await response.json(); // Convert response to JSON object
@@ -19,10 +23,29 @@ export default async function Home() {
     ...dataObject[key]
   })); // Convert object to array
 
+  console.log(posts);
+
+  // Filter posts based on the search query
+  const filteredPosts = posts.filter(post => post.caption.toLowerCase().includes(query));
+
+  // Sort posts based on the selected option
+  filteredPosts.sort((postA, postB) => {
+    if (sort === "created") {
+      // if the selected option is createdAt
+      return postB.createdAt - postA.createdAt;
+    }
+
+    if (sort === "caption") {
+      // if the selected option is caption
+      return postA.caption.localeCompare(postB.caption);
+    }
+  });
+
   return (
     <main className="page">
+      <FormSearch query={query} sort={sort} />
       <section className="grid">
-        {posts.map(post => (
+        {filteredPosts.map(post => (
           <Link key={post.id} href={`/posts/${post.id}`}>
             <PostCard post={post} />
           </Link>
