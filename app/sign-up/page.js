@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
 import { auth } from "../auth";
 import { createUser, getUserByMail } from "../auth/helpers";
