@@ -41,8 +41,9 @@ export default async function SignIn() {
         <h1>Sign In</h1>
         <FormSignIn signInAction={handleSignInWithEmailAndPassword} />
         <p>
-          Don&apos;t have an account? <Link href="/sign-up">Sign up here</Link>
+          Don&apos;t have an account? <Link href="/sign-up">Create an account here.</Link>
         </p>
+        <p>Or continue with GitHub or Google:</p>
         <form>
           <button type="button" className="btn-github" onClick={handleSignInWithGitHub}>
             Sign In with GitHub
