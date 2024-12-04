@@ -157,6 +157,10 @@ form {
   width: 35rem;
 }
 
+#sign-up-form button {
+  grid-column: 2;
+}
+
 /* ---------- Button Group ---------- */
 .btns {
   display: flex;
