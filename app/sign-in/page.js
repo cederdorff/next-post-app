@@ -39,18 +39,16 @@ export default async function SignIn() {
     <main id="sign-in-page" className="page">
       <section className="container">
         <h1>Sign In</h1>
-        <FormSignIn signInAction={handleSignInWithEmailAndPassword} />
-        <p>
-          Don&apos;t have an account? <Link href="/sign-up">Create an account here.</Link>
-        </p>
-        <p>Or continue with GitHub or Google:</p>
-        <form>
+        <form className="form-providers">
           <button type="button" className="btn-github" onClick={handleSignInWithGitHub}>
             Sign In with GitHub
           </button>
           <button type="button" className="btn-google" onClick={handleSignInWithGoogle}>
             Sign In with Google
           </button>
+          <Link href="/sign-in/email" className="btn-email">
+            <button type="button">Sign In with Email</button>
+          </Link>
         </form>
       </section>
     </main>

@@ -2,7 +2,7 @@
 import { useActionState } from "react";
 
 export default function FormSignUp({ signUpAction }) {
-  const [state, formAction] = useActionState(signUpAction, {});
+  const [state, formAction] = useActionState(signUpAction, {}); // useActionState is a custom hook that handles form submission
 
   return (
     <form id="sign-up-form" action={formAction}>

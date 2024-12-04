@@ -32,7 +32,7 @@ export default async function SignIn() {
     await createUser({
       name,
       mail: email,
-      password: hashedPassword
+      password: hashedPassword // save the hashed password
     });
 
     redirect("/sign-in");

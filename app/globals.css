@@ -45,6 +45,10 @@ h3 {
   letter-spacing: 0.1px;
 }
 
+.text-center {
+  text-align: center;
+}
+
 /* ---------- Link Styling ---------- */
 a {
   color: var(--green);
@@ -162,6 +166,11 @@ form {
   grid-column: 2;
 }
 
+.form-providers {
+  width: 500px;
+  max-width: 100%;
+}
+
 /* ---------- Button Group ---------- */
 .btns {
   display: flex;
@@ -184,7 +193,8 @@ form {
 }
 
 .btn-github,
-.btn-google {
+.btn-google,
+.btn-email {
   grid-column-start: 1;
   grid-column-end: 3;
 }
