@@ -15,25 +15,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {}
       },
       authorize: async credentials => {
-        let user = null;
-
+        // check if the user exists in the database
         const dbUser = await getUserByMail(credentials.email);
-        if (!dbUser) {
-          throw new Error("No user found with this email.");
+        if (!dbUser || !dbUser.password) {
+          return null;
         }
 
+        // check if the password is correct
         const passwordMatch = await bcrypt.compare(credentials.password, dbUser.password);
-        if (passwordMatch) {
-          user = dbUser;
-          user.email = dbUser.mail;
+        if (!passwordMatch) {
+          return null;
         }
 
-        if (!user) {
-          // No user found, so this is their first attempt to login
-          // Optionally, this is also the place you could do a user registration
-          throw new Error("Invalid credentials.");
-        }
-
+        const user = {
+          email: dbUser.mail,
+          name: dbUser.name,
+          image: dbUser.image
+        };
         // return user object with their profile data
         return user;
       }

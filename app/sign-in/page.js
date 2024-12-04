@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { auth, signIn } from "../auth";
 import Link from "next/link";
+import FormSignIn from "../components/FormSignIn";
 
 export default async function SignIn() {
   const session = await auth();
@@ -24,24 +25,21 @@ export default async function SignIn() {
     });
   }
 
-  async function handleSignInWithEmailAndPassword(formData) {
+  async function handleSignInWithEmailAndPassword(currentState, formData) {
     "use server";
-
-    await signIn("credentials", formData);
+    try {
+      await signIn("credentials", formData);
+      redirect("/posts");
+    } catch (error) {
+      return { message: "Invalid email or password", email: formData.get("email") };
+    }
   }
 
   return (
     <main id="sign-in-page" className="page">
       <section className="container">
         <h1>Sign In</h1>
-        <form id="sign-in-form" action={handleSignInWithEmailAndPassword}>
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" name="email" required />
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" name="password" required />
-          <label></label>
-          <button type="submit">Sign In</button>
-        </form>
+        <FormSignIn signInAction={handleSignInWithEmailAndPassword} />
         <p>
           Don&apos;t have an account? <Link href="/sign-up">Sign up here</Link>
         </p>
