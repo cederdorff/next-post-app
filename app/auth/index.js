@@ -15,6 +15,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {}
       },
       async authorize(credentials) {
+        // Check if the user exists in the database
         const dbUser = await getUserByMail(credentials.email);
         if (!dbUser || !dbUser.password) {
           // Return null if user not found or password is missing
