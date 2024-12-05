@@ -3,7 +3,7 @@ import { auth, signIn } from "../auth";
 
 export default async function SignIn() {
   const session = await auth();
-  console.log("session", session);
+  // if the user is already signed in, redirect them to the profile page
   if (session) {
     redirect("/profile");
   }
@@ -28,16 +28,10 @@ export default async function SignIn() {
       <section className="container">
         <h1>Sign In</h1>
         <form id="sign-in-form">
-          <button
-            type="button"
-            className="btn-github"
-            onClick={handleSignInWithGitHub}>
+          <button type="button" className="btn-github" onClick={handleSignInWithGitHub}>
             Sign In with GitHub
           </button>
-          <button
-            type="button"
-            className="btn-google"
-            onClick={handleSignInWithGoogle}>
+          <button type="button" className="btn-google" onClick={handleSignInWithGoogle}>
             Sign In with Google
           </button>
         </form>

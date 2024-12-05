@@ -4,7 +4,7 @@ import FormUserProfile from "../components/FormUserProfile";
 
 export default async function Profile() {
   const session = await auth();
-  console.log("session", session);
+  // if the user is not signed in, redirect them to the sign-in page
   if (!session) {
     redirect("/sign-in");
   }

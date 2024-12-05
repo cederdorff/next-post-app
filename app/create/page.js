@@ -4,6 +4,7 @@ import { auth } from "../auth";
 
 export default async function CreatePage() {
   const session = await auth();
+  // if the user is not signed in, redirect them to the sign-in page
   if (!session) {
     redirect("/sign-in");
   }

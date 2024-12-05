@@ -7,7 +7,7 @@ import FormSearch from "../components/FormSearch";
 
 export default async function Home({ searchParams }) {
   const session = await auth();
-  console.log(session);
+  // if the user is not signed in, redirect them to the sign-in page
   if (!session) {
     redirect("/sign-in");
   }
@@ -22,8 +22,6 @@ export default async function Home({ searchParams }) {
     id: key,
     ...dataObject[key]
   })); // Convert object to array
-
-  console.log(posts);
 
   // Filter posts based on the search query
   const filteredPosts = posts.filter(post => post.caption.toLowerCase().includes(query));
