@@ -1,10 +1,10 @@
-import { auth } from "@/app/auth";
+import { getSession } from "@/app/auth";
 import PostCard from "@/app/components/PostCard";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function PostPage({ params }) {
-  const session = await auth();
+  const session = await getSession();
   // if the user is not signed in, redirect them to the sign-in page
   if (!session) {
     redirect("/sign-in");

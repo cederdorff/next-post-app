@@ -2,8 +2,8 @@
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { signInUserOnServer } from "../auth/helpers";
 import { firebaseAuth } from "../firebase";
+import { login } from "../auth";
 
 export default function FormSignIn() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -15,12 +15,14 @@ export default function FormSignIn() {
 
     signInWithEmailAndPassword(firebaseAuth, mail, password)
       .then(userCredential => {
+        console.log(userCredential); // for test purposes: logging the userCredential
+
         // Signed in
         const user = userCredential.user;
         console.log(user); // for test purposes: logging the authenticated user
         // await signInUser(user);
         if (user) {
-          signInUserOnServer({
+          login({
             uid: user.uid,
             email: user.email,
             accessToken: user.accessToken

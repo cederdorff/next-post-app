@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation";
-import { auth } from "../auth";
+import { getSession } from "../auth";
 import FormUserProfile from "../components/FormUserProfile";
 import SignOutButton from "../components/SignOutButton";
 
 export default async function Profile() {
-  const session = await auth();
+  const session = await getSession();
   console.log(session);
 
   // if the user is not signed in, redirect them to the sign-in page

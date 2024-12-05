@@ -1,12 +1,11 @@
-import { redirect } from "next/navigation";
-import { auth } from "../auth";
-import PostCard from "../components/PostCard";
 import Link from "next/link";
-import Form from "next/form";
+import { redirect } from "next/navigation";
+import { getSession } from "../auth";
 import FormSearch from "../components/FormSearch";
+import PostCard from "../components/PostCard";
 
 export default async function Home({ searchParams }) {
-  const session = await auth();
+  const session = await getSession();
   // if the user is not signed in, redirect them to the sign-in page
   if (!session) {
     redirect("/sign-in");

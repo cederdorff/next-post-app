@@ -1,7 +1,5 @@
 "use server";
 
-import { signIn, signOut } from "./index";
-
 export async function getUserByMail(mail) {
   const url = `${process.env.NEXT_PUBLIC_FB_DB_URL}/users.json?orderBy="mail"&equalTo="${mail}"`;
   const response = await fetch(url);
@@ -20,12 +18,4 @@ export async function createUser(user) {
   const data = await response.json();
 
   return { id: data.name, ...user };
-}
-
-export async function signInUserOnServer(user) {
-  await signIn("credentials", user); // calling the signIn function from auth.js
-}
-
-export async function signOutUserOnServer() {
-  await signOut();
 }

@@ -1,9 +1,9 @@
-import { auth } from "@/app/auth";
+import { auth, getSession } from "@/app/auth";
 import FormPost from "@/app/components/FormPost";
 import { redirect } from "next/navigation";
 
 export default async function UpdatePage({ params }) {
-  const session = await auth();
+  const session = await getSession();
   // if the user is not signed in, redirect them to the sign-in page
   if (!session) {
     redirect("/sign-in");
