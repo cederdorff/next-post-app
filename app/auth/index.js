@@ -25,9 +25,11 @@ export async function login(firebaseAuthUser) {
   // Verify credentials && get the user
 
   console.log(firebaseAuthUser);
-
-  const user = { email: formData.get("email"), name: "John" };
-
+  const user = {
+    uid: firebaseAuthUser.uid,
+    email: firebaseAuthUser.email,
+    accessToken: firebaseAuthUser.accessToken
+  };
   // Create the session
   const expires = new Date(Date.now() + 10 * 1000);
   const session = await encrypt({ user, expires });
@@ -42,7 +44,7 @@ export async function logout() {
 }
 
 export async function getSession() {
-  const session = cookies().get("session")?.value;
+  const session = (await cookies()).get("session")?.value;
   if (!session) return null;
   return await decrypt(session);
 }
