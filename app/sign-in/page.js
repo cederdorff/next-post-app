@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
-import { auth, signIn } from "../auth";
+import { auth } from "../auth";
+import FormSignIn from "../components/FormSignIn";
 
 export default async function SignIn() {
   const session = await auth();
@@ -8,33 +9,11 @@ export default async function SignIn() {
     redirect("/profile");
   }
 
-  async function handleSignInWithGitHub() {
-    "use server";
-
-    await signIn("github", {
-      redirectTo: "/posts"
-    });
-  }
-  async function handleSignInWithGoogle() {
-    "use server";
-
-    await signIn("google", {
-      redirectTo: "/posts"
-    });
-  }
-
   return (
     <main id="sign-in-page" className="page">
       <section className="container">
         <h1>Sign In</h1>
-        <form id="sign-in-form">
-          <button type="button" className="btn-github" onClick={handleSignInWithGitHub}>
-            Sign In with GitHub
-          </button>
-          <button type="button" className="btn-google" onClick={handleSignInWithGoogle}>
-            Sign In with Google
-          </button>
-        </form>
+        <FormSignIn />
       </section>
     </main>
   );

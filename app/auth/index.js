@@ -1,10 +1,18 @@
 import NextAuth from "next-auth";
-import GitHub from "next-auth/providers/github";
-import Google from "next-auth/providers/google";
+import Credentials from "next-auth/providers/credentials";
 import { createUser, getUserByMail } from "./helpers";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [GitHub, Google],
+  providers: [
+    Credentials({
+      async authorize(credentials) {
+        if (credentials.uid && credentials.email && credentials.accessToken) {
+          return { uid: credentials.uid, email: credentials.email, accessToken: credentials.accessToken };
+        }
+        return null;
+      }
+    })
+  ],
   callbacks: {
     async session({ session }) {
       // Add additional properties to the session
