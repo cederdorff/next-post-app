@@ -25,16 +25,6 @@ export default async function SignIn() {
     });
   }
 
-  async function handleSignInWithEmailAndPassword(currentState, formData) {
-    "use server";
-    try {
-      await signIn("credentials", formData);
-      redirect("/posts");
-    } catch (error) {
-      return { message: "Invalid email or password", email: formData.get("email") };
-    }
-  }
-
   return (
     <main id="sign-in-page" className="page">
       <section className="container">
