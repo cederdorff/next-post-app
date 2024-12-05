@@ -6,14 +6,14 @@ import FormSignUp from "../components/FormSignUp";
 
 export default async function SignIn() {
   const session = await auth();
-  console.log("session", session);
+  // if the user is already signed in, redirect them to the profile page
   if (session) {
     redirect("/profile");
   }
 
   async function handleSignUpWithEmailAndPassword(currentState, formData) {
     "use server"; // this code will run on the server only
-
+    // get the form data
     const name = formData.get("name");
     const email = formData.get("email");
     const password = formData.get("password");
@@ -35,6 +35,7 @@ export default async function SignIn() {
       password: hashedPassword // save the hashed password
     });
 
+    // redirect the user to the sign-in page
     redirect("/sign-in");
   }
 

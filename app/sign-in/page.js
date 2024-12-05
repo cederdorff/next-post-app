@@ -1,11 +1,10 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth, signIn } from "../auth";
-import Link from "next/link";
-import FormSignIn from "../components/FormSignIn";
 
 export default async function SignIn() {
   const session = await auth();
-  console.log("session", session);
+  // if the user is already signed in, redirect them to the profile page
   if (session) {
     redirect("/profile");
   }

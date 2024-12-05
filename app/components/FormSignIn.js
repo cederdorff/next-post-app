@@ -12,7 +12,7 @@ export default function FormSignIn({ signInAction }) {
         id="email"
         name="email"
         placeholder="Type your email..."
-        defaultValue={state.email}
+        defaultValue={state?.email}
         required
       />
       <label htmlFor="password">Password</label>

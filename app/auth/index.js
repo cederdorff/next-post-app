@@ -15,25 +15,25 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {}
       },
       async authorize(credentials) {
-        // check if the user exists in the database
         const dbUser = await getUserByMail(credentials.email);
         if (!dbUser || !dbUser.password) {
+          // Return null if user not found or password is missing
           return null;
         }
 
-        // check if the password is correct
+        // Check if the password matches
         const passwordMatch = await bcrypt.compare(credentials.password, dbUser.password);
         if (!passwordMatch) {
+          // Return null for incorrect password
           return null;
         }
 
-        const user = {
-          email: dbUser.mail,
+        // Return user object
+        return {
           name: dbUser.name,
+          email: dbUser.mail,
           image: dbUser.image
         };
-        // return user object with their profile data
-        return user;
       }
     })
   ],

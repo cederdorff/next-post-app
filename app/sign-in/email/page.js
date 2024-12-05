@@ -5,6 +5,7 @@ import FormSignIn from "../../components/FormSignIn";
 
 export default async function SignIn() {
   const session = await auth();
+  // if the user is already signed in, redirect them to the profile page
   if (session) {
     redirect("/profile");
   }
@@ -13,7 +14,6 @@ export default async function SignIn() {
     "use server";
     try {
       await signIn("credentials", formData);
-      redirect("/posts");
     } catch (error) {
       return { message: "Invalid email or password", email: formData.get("email") };
     }
