@@ -12,7 +12,7 @@ export default async function Profile() {
     redirect("/sign-in");
   }
 
-  const url = `${process.env.NEXT_PUBLIC_FB_DB_URL}/users/${session.fbUid}.json`;
+  const url = `${process.env.NEXT_PUBLIC_FB_DB_URL}/users/${session.uid}.json`;
   const response = await fetch(url);
   const user = await response.json();
 

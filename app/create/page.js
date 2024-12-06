@@ -21,7 +21,7 @@ export default async function CreatePage() {
       body: JSON.stringify({
         caption,
         image,
-        uid: session.fbUid,
+        uid: session.uid,
         createdAt
       })
     });

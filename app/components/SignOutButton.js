@@ -1,12 +1,14 @@
 "use client";
 
 import { signOut } from "firebase/auth";
-import { firebaseAuth } from "../firebaseConfig";
+import { logoutUser } from "../auth/";
+import { auth } from "../firebaseConfig";
 
 export default function SignOutButton() {
   async function handleSignOut() {
     // sign out the user
-    await signOut(firebaseAuth);
+    await signOut(auth); // Call client-side function
+    await logoutUser(); // Call server-side function
   }
 
   return (

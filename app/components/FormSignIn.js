@@ -2,8 +2,8 @@
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { firebaseAuth } from "../firebaseConfig";
-import { login } from "../auth";
+import { auth } from "../firebaseConfig";
+import { loginUser } from "../auth/";
 
 export default function FormSignIn() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -13,21 +13,13 @@ export default function FormSignIn() {
     const mail = event.target.mail.value; // mail value from inout field in sign in form
     const password = event.target.password.value; // password value from inout field in sign in form
 
-    signInWithEmailAndPassword(firebaseAuth, mail, password)
-      .then(userCredential => {
+    signInWithEmailAndPassword(auth, mail, password)
+      .then(async userCredential => {
+        // Signed in
         console.log(userCredential); // for test purposes: logging the userCredential
 
-        // Signed in
-        const user = userCredential.user;
-        console.log(user); // for test purposes: logging the authenticated user
-        // await signInUser(user);
-        if (user) {
-          login({
-            uid: user.uid,
-            email: user.email,
-            accessToken: user.accessToken
-          });
-        }
+        const idToken = await userCredential.user.getIdToken();
+        await loginUser(idToken); // Call server-side function
       })
       .catch(error => {
         let code = error.code; // saving error code in variable
