@@ -2,7 +2,7 @@
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { firebaseAuth } from "../firebase";
+import { firebaseAuth } from "../firebaseConfig";
 import { login } from "../auth";
 
 export default function FormSignIn() {
