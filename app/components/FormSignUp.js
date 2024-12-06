@@ -2,7 +2,8 @@
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import { createUser } from "../auth/helpers";
+import { saveUser } from "../auth/helpers";
+import { useState } from "react";
 
 export default function FormSignUp() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -12,14 +13,14 @@ export default function FormSignUp() {
     const form = event.target;
 
     const name = form.name.value;
-    const mail = form.mail.value;
+    const mail = form.email.value;
     const password = form.password.value;
 
     createUserWithEmailAndPassword(auth, mail, password)
       .then(userCredential => {
         // Created and signed in
         const user = userCredential.user;
-        createUser(user.uid, name, mail); // creating a new user in the database
+        saveUser(user.uid, name, mail); // creating a new user in the database
       })
       .catch(error => {
         let code = error.code; // saving error code in variable
@@ -33,7 +34,7 @@ export default function FormSignUp() {
   return (
     <form id="sign-up-form" onSubmit={handleSignUp}>
       <label htmlFor="name">Name</label>
-      <input type="text" id="name" name="name" placeholder="Type your name..." d required />
+      <input type="text" id="name" name="name" placeholder="Type your name..." required />
       <label htmlFor="email">Email</label>
       <input type="email" id="email" name="email" placeholder="Type your email..." required />
       <label htmlFor="password">Password</label>

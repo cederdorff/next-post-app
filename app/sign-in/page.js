@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getSession } from "../auth";
 import FormSignIn from "../components/FormSignIn";
+import Link from "next/link";
 
 export default async function SignIn() {
   const session = await getSession();
@@ -14,6 +15,9 @@ export default async function SignIn() {
       <section className="container">
         <h1>Sign In</h1>
         <FormSignIn />
+        <p className="text-center">
+          Don&apos;t have an account? <Link href="/sign-up">Create an account here.</Link>
+        </p>
       </section>
     </main>
   );

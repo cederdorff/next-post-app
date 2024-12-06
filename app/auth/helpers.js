@@ -9,13 +9,13 @@ export async function getUserByMail(mail) {
   return user;
 }
 
-export async function createUser(user) {
-  const url = `${process.env.NEXT_PUBLIC_FB_DB_URL}/users.json`;
+export async function saveUser(uid, name, mail) {
+  const url = `${process.env.NEXT_PUBLIC_FB_DB_URL}/users/${uid}.json`;
   const response = await fetch(url, {
-    method: "POST",
-    body: JSON.stringify(user)
+    method: "PUT",
+    body: JSON.stringify({ name, mail })
   });
   const data = await response.json();
 
-  return { id: data.name, ...user };
+  return { id: data.name, name, mail };
 }

@@ -45,6 +45,10 @@ h3 {
   letter-spacing: 0.1px;
 }
 
+.text-center {
+  text-align: center;
+}
+
 /* ---------- Link Styling ---------- */
 a {
   color: var(--green);
