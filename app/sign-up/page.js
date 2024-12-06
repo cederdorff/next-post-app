@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getSession } from "../auth";
 import FormSignIn from "../components/FormSignIn";
+import FormSignUp from "../components/FormSignUp";
 
 export default async function SignIn() {
   const session = await getSession();
@@ -12,8 +13,8 @@ export default async function SignIn() {
   return (
     <main id="sign-in-page" className="page">
       <section className="container">
-        <h1>Sign In</h1>
-        <FormSignIn />
+        <h1>Sign Up</h1>
+        <FormSignUp />
       </section>
     </main>
   );
