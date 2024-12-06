@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import useAuthTokenSync from "../hooks/useAuthTokenSync";
 
 export default function Nav() {
   const pathname = usePathname();
+  useAuthTokenSync(); // Sync user token with the server
 
   return (
     <nav>

@@ -16,7 +16,8 @@ export async function loginUser(idToken) {
 
     return { success: true, email: decodedToken.email };
   } catch (error) {
-    throw new Error("Invalid or expired token");
+    console.log("Invalid or expired token:", error.message);
+    return { success: false, error: "Failed to refresh token" };
   }
 }
 
@@ -30,6 +31,15 @@ export async function getSession() {
   const token = cookieStore.get("authToken")?.value;
 
   if (!token) return null;
-  const decodedToken = await adminAuth.verifyIdToken(token);
-  return decodedToken;
+
+  try {
+    const decodedToken = await adminAuth.verifyIdToken(token);
+    return decodedToken; // Return session data if valid
+  } catch (error) {
+    if (error.code === "auth/id-token-expired") {
+      // Handle token expiry by returning null (client can handle re-login)
+      return null;
+    }
+    throw error; // Handle other errors
+  }
 }
