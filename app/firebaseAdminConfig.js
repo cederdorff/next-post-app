@@ -16,6 +16,4 @@ if (!getApps().length) {
   adminApp = getApps()[0]; // Reuse existing app
 }
 
-const adminAuth = getAuth(adminApp);
-
-export { adminAuth };
+export const adminAuth = getAuth(adminApp);
